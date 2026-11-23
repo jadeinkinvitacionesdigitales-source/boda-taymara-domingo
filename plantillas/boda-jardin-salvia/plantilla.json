@@ -1,0 +1,40 @@
+{
+  "nombre": "Jardín Salvia (tarjeta y eucalipto)",
+  "tipos": [
+    "boda",
+    "aniversario",
+    "xv",
+    "otro"
+  ],
+  "fuentes_url": "https://fonts.googleapis.com/css2?family=Parisienne&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;500&display=swap",
+  "fuentes_incluidas": [
+    "Parisienne",
+    "Cormorant Garamond",
+    "Montserrat"
+  ],
+  "encabezado": false,
+  "portada": "tarjeta",
+  "animaciones": true,
+  "variables": {
+    "fondo": "--fondo",
+    "texto": "--texto",
+    "acento": "--salvia",
+    "detalle": "--hoja"
+  },
+  "variables_fuentes": {
+    "titulo": "--f-titulo",
+    "texto": "--f-texto",
+    "script": "--f-script"
+  },
+  "colores_defecto": {
+    "fondo": "#f8f5ee",
+    "texto": "#4a4a44",
+    "acento": "#66755e",
+    "detalle": "#9cae8f"
+  },
+  "orden": [
+    "portada", "musica", "frase", "padres", "nosotros", "invitacion", "historia", "cuenta_regresiva", "calendario",
+    "galeria", "lugares", "itinerario", "puestos", "rsvp", "obsequios", "vestimenta", "aviso", "hospedaje",
+    "playlist", "album", "contacto", "cierre"
+  ]
+}

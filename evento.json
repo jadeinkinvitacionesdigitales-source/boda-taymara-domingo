@@ -1,0 +1,211 @@
+{
+  "slug": "boda-taymara-domingo",
+  "tipo": "boda",
+  "titulo": "Taymara & Domingo",
+  "fecha_hora": "2027-02-27T15:00:00-05:00",
+  "fecha_fin": "2027-02-27T23:00:00-05:00",
+  "plantilla": "boda-jardin-salvia",
+  "estado": "publicado",
+  "rsvp_limite": "2027-01-10",
+  "rsvp_sin_codigo": true,
+  "config": {
+    "idioma": "es",
+    "nombres": {
+      "principal": "Taymara Villarreal Gondola",
+      "secundario": "Domingo Camargo Molinar",
+      "conector": "&"
+    },
+    "colores": {
+      "fondo": "#f3efe6",
+      "texto": "#453832",
+      "acento": "#453832",
+      "detalle": "#a59788"
+    },
+    "adornos": {
+      "fondo": "media/fondo-terraza-mar.webp",
+      "esquina": "media/flores-der.webp"
+    },
+    "contacto_whatsapp": "+507 6692-4009",
+    "whatsapp_plantilla": "Hola {nombre} 💌 Con mucho cariño te invitamos a {titulo}. Hemos reservado {puestos} puesto(s) para ti. Abre tu invitación y confirma aquí: {enlace}",
+    "compartir": {
+      "titulo": "Nuestra boda | Taymara & Domingo",
+      "descripcion": "27.02.2027",
+      "imagen": "media/foto-principal.webp"
+    },
+    "secciones": [
+      {
+        "tipo": "portada",
+        "variante": "foto",
+        "foto": "media/foto-portada.webp",
+        "antetitulo": "Nuestra boda",
+        "texto": "2 almas, 1 camino",
+        "nota": "Nuestra alegría estará completa al compartir este día con las personas que más queremos.",
+        "despedida": "¡Te esperamos!"
+      },
+      {
+        "tipo": "frase",
+        "texto": "«Dios es amor; quien permanece en el amor permanece en Dios.»",
+        "cita": "1 Juan 4:16"
+      },
+      {
+        "tipo": "nosotros",
+        "antetitulo": "Nosotros",
+        "foto": "media/foto-nosotros.webp"
+      },
+      {
+        "tipo": "padres",
+        "titulo": "Con la bendición de Dios y de nuestros padres",
+        "items": [
+          "María Isabel Molinar de Camargo",
+          "Domingo Camargo Herrera",
+          "Everlyn Elizabeth Gondola de Villarreal",
+          "Rubén Raúl Villarreal B."
+        ]
+      },
+      {
+        "tipo": "historia",
+        "titulo": "Nuestra historia",
+        "items": [
+          {
+            "titulo": "Toda una vida por compartir",
+            "texto": "Nuestra historia comenzó con la coincidencia de celebrar la vida el mismo mes. Lo que no imaginábamos era que aquel encuentro nos llevaría a compartir el resto de nuestras vidas.\nEntre alegrías, desafíos y sueños compartidos, nuestro amor ha crecido y nos ha enseñado el valor de elegirnos cada día.\nHoy, con la bendición de Dios y rodeados del cariño de nuestras familias, queremos sellar ese amor en matrimonio y abrir un nuevo capítulo lleno de fe, ilusión y esperanza.\nSerá una alegría tenerte a nuestro lado para celebrar lo que hemos construido y todo lo que aún nos queda por vivir.\nCon amor,\nDomi y Tay",
+            "foto": "media/foto-historia.webp"
+          }
+        ]
+      },
+      {
+        "tipo": "frase",
+        "texto": "Caminaremos juntos hacia el altar"
+      },
+      {
+        "tipo": "cuenta_regresiva",
+        "titulo": "Comenzó la cuenta regresiva",
+        "subtitulo": "para nuestro matrimonio"
+      },
+      {
+        "tipo": "calendario"
+      },
+      {
+        "tipo": "galeria",
+        "fotos": [
+          "media/foto-galeria.webp"
+        ]
+      },
+      {
+        "tipo": "lugares",
+        "items": [
+          {
+            "nombre": "Ceremonia religiosa",
+            "hora": "3:00 p. m.",
+            "lugar": "Parroquia San Mateo, Templo de la Divina Misericordia",
+            "direccion": "Ciudad de Panamá",
+            "mapa": "https://maps.app.goo.gl/xvGKJzSLVhUUZzrXA"
+          },
+          {
+            "nombre": "Recepción",
+            "hora": "5:00 p. m.",
+            "lugar": "Hotel InterContinental Miramar Panamá",
+            "direccion": "Avenida Balboa, Ciudad de Panamá"
+          }
+        ]
+      },
+      {
+        "tipo": "itinerario",
+        "items": [
+          {
+            "hora": "2:40 p. m.",
+            "texto": "Llegada de invitados a la iglesia"
+          },
+          {
+            "hora": "3:00 p. m.",
+            "texto": "Ceremonia religiosa"
+          },
+          {
+            "hora": "5:00 p. m.",
+            "texto": "Cóctel de bienvenida en el hotel"
+          },
+          {
+            "hora": "5:20 p. m.",
+            "texto": "Entrada de los recién casados"
+          },
+          {
+            "hora": "6:00 p. m.",
+            "texto": "Cena y celebración"
+          },
+          {
+            "hora": "11:00 p. m.",
+            "texto": "Despedida"
+          }
+        ]
+      },
+      {
+        "tipo": "obsequios",
+        "titulo": "¿Qué regalarnos?",
+        "texto": "El mejor regalo es tu compañía, pero si deseas contribuir a nuestro futuro juntos, aquí te dejamos nuestros datos con mucho amor.",
+        "banco": {
+          "titular": "Taymara Villarreal Gondola",
+          "identificacion": "Cédula 0-000-0000",
+          "numero": "00-00-00-000000-0",
+          "banco": "Nombre del banco",
+          "tipo": "Ahorros"
+        }
+      },
+      {
+        "tipo": "vestimenta",
+        "titulo": "Dress Code",
+        "ilustracion": "media/vestimenta-gala.webp",
+        "codigo": "Formal",
+        "nota": "Con mucho cariño, te pedimos no vestir estos colores, ya que están reservados para los novios y su cortejo.\nRecuerda también que el blanco es un honor reservado para la novia.",
+        "paleta_titulo": "Colores reservados",
+        "colores_reservados": [
+          {
+            "nombre": "Marfil perla",
+            "hex": "#f1e7dd"
+          },
+          {
+            "nombre": "Champaña arena",
+            "hex": "#cbb697"
+          },
+          {
+            "nombre": "Taupe piedra",
+            "hex": "#9e8976"
+          },
+          {
+            "nombre": "Azul bruma",
+            "hex": "#7c8a93"
+          },
+          {
+            "nombre": "Espresso",
+            "hex": "#42352c"
+          },
+          {
+            "nombre": "Negro carbón",
+            "hex": "#2e2d2b"
+          }
+        ]
+      },
+      {
+        "tipo": "album",
+        "titulo": "Sube tus fotos",
+        "texto": "Comparte con nosotros tus fotos y videos en nuestro álbum de boda colaborativo.",
+        "enlace": "https://photos.google.com/",
+        "qr": false
+      },
+      {
+        "tipo": "puestos"
+      },
+      {
+        "tipo": "rsvp"
+      },
+      {
+        "tipo": "contacto"
+      },
+      {
+        "tipo": "cierre",
+        "titulo": "¡Los esperamos!",
+        "texto": "Gracias por acompañarnos en este día tan especial.",
+        "foto": "media/foto-principal.webp"
+      }
+    ]
+  }
+}

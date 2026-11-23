@@ -1,0 +1,739 @@
+/* ============================================================
+   PLANTILLA "JARDÍN SALVIA"
+   Tarjeta de portada, ramas de eucalipto y bloques verde salvia.
+   Colores y fuentes por defecto. Cada evento puede cambiarlos
+   en su config ("colores" y "fuentes").
+   ============================================================ */
+:root {
+  --fondo: #f8f5ee;         /* marfil */
+  --texto: #4a4a44;         /* gris cálido para textos */
+  --salvia: #66755e;        /* verde salvia: botones y bloques */
+  --hoja: #9cae8f;          /* ramas, corazones y detalles */
+  --linea: color-mix(in srgb, var(--hoja) 45%, transparent);
+  --f-script: "Parisienne", cursive;
+  --f-titulo: "Cormorant Garamond", serif;
+  --f-texto: "Montserrat", sans-serif;
+  --boton-musica: var(--salvia);
+  --ancho: 520px;
+}
+
+#invitacion * { box-sizing: border-box; }
+#invitacion :where(h1, h2, h3, p, ul, ol, blockquote, figure, fieldset, table) { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body.invitacion {
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--f-texto);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+#invitacion { overflow-x: hidden; }
+#invitacion a { color: inherit; }
+#invitacion img { max-width: 100%; }
+
+/* Cada sección: columna angosta centrada (se ve igual en celular y computadora) */
+.sec {
+  position: relative;
+  max-width: var(--ancho);
+  margin: 0 auto;
+  padding: 56px 24px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.sec p + p { margin-top: 10px; }
+
+/* Títulos en letra manuscrita, con una ramita debajo */
+.sec-titulo {
+  font-family: var(--f-script);
+  font-weight: 400;
+  font-size: clamp(34px, 9vw, 44px);
+  line-height: 1.2;
+  color: var(--texto);
+}
+.sec-titulo::after {
+  content: "";
+  display: block;
+  width: 110px;
+  height: 33px;
+  margin: 10px auto 18px;
+  background: var(--hoja);
+  -webkit-mask: url("img/ramita.svg") center / contain no-repeat;
+  mask: url("img/ramita.svg") center / contain no-repeat;
+}
+
+/* Aparecer suavemente al bajar */
+.aparece { opacity: 0; transform: translateY(26px); transition: opacity .9s ease, transform .9s ease; }
+.aparece.visible { opacity: 1; transform: none; }
+
+/* Adornos de eucalipto (toman el color "Detalles") */
+.adorno {
+  position: absolute;
+  width: 210px;
+  height: 210px;
+  background: var(--hoja);
+  -webkit-mask: url("img/rama.svg") center / contain no-repeat;
+  mask: url("img/rama.svg") center / contain no-repeat;
+  opacity: .85;
+  pointer-events: none;
+}
+.adorno-izq { top: -20px; left: -40px; }
+.adorno-der { top: -20px; right: -40px; transform: scaleX(-1); }
+.adorno-abajo { bottom: -30px; right: -50px; transform: rotate(180deg); width: 170px; height: 170px; opacity: .6; }
+
+/* Adornos propios del evento (Generador › paso 8): reemplazan al eucalipto */
+/* El fondo queda quieto detrás mientras se baja (funciona también en iPhone) */
+body.con-fondo::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--fondo) var(--img-fondo) center / cover no-repeat;
+}
+.con-fondo .tarjeta { background: none; }
+.con-esquina .adorno {
+  -webkit-mask: none;
+  mask: none;
+  background: var(--img-esquina) center / contain no-repeat;
+  opacity: 1;
+  width: 190px;
+  height: 230px;
+}
+.con-esquina .adorno-izq { display: none; }
+.con-esquina .adorno-der { top: -34px; right: -44px; left: auto; transform: rotate(180deg); }
+.con-esquina .adorno-abajo { bottom: -24px; left: -44px; right: auto; transform: none; }
+.con-separador .sec-titulo::after {
+  -webkit-mask: none;
+  mask: none;
+  background: var(--img-separador) center / contain no-repeat;
+  width: 170px;
+  height: 70px;
+}
+
+/* Foto vacía (mientras no se sube) */
+.foto-vacia {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(140deg, color-mix(in srgb, var(--hoja) 55%, #fff), var(--salvia));
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+/* ---------- Portada: tarjeta + foto ---------- */
+.sec-portada { padding: 0; max-width: none; }
+.tarjeta {
+  position: relative;
+  overflow: hidden;
+  min-height: 100svh;
+  max-width: var(--ancho);
+  margin: 0 auto;
+  padding: 120px 28px 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  background: radial-gradient(ellipse at 50% 40%, #fff 0%, transparent 70%);
+}
+.tarjeta .antetitulo { font-size: 11px; letter-spacing: .3em; text-transform: uppercase; }
+.tarjeta-nombres { display: flex; flex-direction: column; align-items: center; font-weight: 400; }
+.tarjeta-nombres .nombre {
+  font-family: var(--f-script);
+  font-size: clamp(50px, 15vw, 72px);
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+}
+/* Espacio para las colas de letras como "y" o "g" antes de los apellidos */
+.tarjeta-nombres .nombre:has(+ .apellido) { padding-bottom: 18px; }
+.tarjeta-nombres .apellido {
+  font-size: 11px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+}
+.tarjeta-nombres .y {
+  font-family: var(--f-titulo);
+  font-style: italic;
+  font-size: 26px;
+  color: var(--hoja);
+  margin: 2px 0;
+}
+.tarjeta-texto { font-family: var(--f-titulo); font-style: italic; font-size: 20px; line-height: 1.5; max-width: 340px; }
+.tarjeta-fecha { width: 100%; max-width: 360px; margin-top: 8px; }
+.tarjeta-hora { font-size: 12px; letter-spacing: .24em; text-transform: uppercase; }
+.fila-fecha {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 14px;
+  margin: 6px 0;
+}
+.fila-fecha .lado {
+  border-top: 1px solid var(--linea);
+  border-bottom: 1px solid var(--linea);
+  padding: 7px 0;
+  font-size: 12px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+.dia-grande { font-family: var(--f-titulo); font-size: 64px; line-height: 1; font-weight: 400; }
+.tarjeta-anio { font-family: var(--f-titulo); font-size: 22px; letter-spacing: .3em; }
+
+/* Botón, nota y despedida de la portada */
+#invitacion .boton-entrar { margin-top: 10px; max-width: 100%; }
+.tarjeta-nota { font-size: 12px; line-height: 1.7; max-width: 320px; }
+.tarjeta-despedida { font-family: var(--f-script); font-size: 40px; line-height: 1.2; }
+
+/* Página de entrada: la tarjeta tapa todo hasta tocar el botón */
+body.invitacion-cerrada { overflow: hidden; }
+.tarjeta.tarjeta-entrada {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  max-width: none;
+  overflow-y: auto;
+  padding: 90px 28px 70px;
+  gap: 14px;
+  justify-content: safe center; /* si no cabe, empieza arriba en vez de cortarse */
+  background: var(--fondo) var(--img-fondo, none) center / cover no-repeat;
+  transition: opacity .8s ease, transform .8s ease;
+}
+.tarjeta-entrada > :not(.adorno, .boton) { width: 100%; max-width: 460px; }
+.tarjeta.tarjeta-entrada.abriendo { opacity: 0; transform: scale(1.04); pointer-events: none; }
+
+.sec-portada .hero-foto {
+  position: relative;
+  max-width: var(--ancho);
+  margin: 0 auto;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+.sec-portada .hero-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sec-portada .hero-foto::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, .35), transparent 45%);
+  pointer-events: none;
+}
+.sello {
+  position: absolute;
+  z-index: 1;
+  top: 9%;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 46%;
+  max-height: 30%;
+}
+.sello-letras {
+  font-family: var(--f-titulo);
+  font-size: clamp(64px, 20vw, 104px);
+  line-height: 1;
+  color: #fff;
+  letter-spacing: .12em;
+  white-space: nowrap;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, .3);
+}
+
+/* ---------- Música ---------- */
+.musica-texto { font-family: var(--f-titulo); font-style: italic; font-size: 19px; }
+.musica-cancion { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; margin-top: 12px !important; }
+.sec-musica .musica-texto { font-family: var(--f-texto); font-style: normal; font-size: 13px; }
+.musica-progreso {
+  width: min(240px, 80%);
+  height: 2px;
+  margin: 16px auto 0;
+  background: var(--linea);
+  border-radius: 2px;
+}
+.musica-progreso span { display: block; width: 0; height: 100%; background: var(--salvia); border-radius: 2px; }
+/* Botón en forma de corazón con ⏮ ⏭ a los lados (solo adorno) */
+#invitacion .boton-musica {
+  position: relative;
+  width: 66px;
+  height: 60px;
+  min-height: 0;
+  padding: 0;
+  margin: 16px auto 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--salvia);
+  box-shadow: none;
+  -webkit-mask: url("img/corazon.svg") center / contain no-repeat;
+  mask: url("img/corazon.svg") center / contain no-repeat;
+}
+.sec-musica .boton-musica + .musica-cancion { margin-top: 8px !important; }
+.sec-musica::after {
+  content: "⏮\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0⏭";
+  display: block;
+  margin-top: -40px;
+  font-size: 11px;
+  color: var(--hoja);
+  pointer-events: none;
+}
+.musica-etiqueta { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.musica-icono {
+  display: block;
+  width: 0;
+  height: 0;
+  margin: -4px auto 0 27px;
+  border-left: 14px solid #fff;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+}
+.sonando .musica-icono { width: 12px; height: 16px; margin: -4px auto 0; border: 0; border-left: 4px solid #fff; border-right: 4px solid #fff; }
+
+/* ---------- Frase, invitación, padres ---------- */
+.sec-frase blockquote p { font-family: var(--f-titulo); font-style: italic; font-size: 21px; line-height: 1.55; }
+.sec-frase cite { display: block; margin-top: 12px; font-style: normal; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--salvia); }
+/* Línea vertical bajo el versículo y anillos sobre "Con la bendición de…" */
+.sec-frase::after { content: ""; display: block; width: 1px; height: 46px; margin: 26px auto -30px; background: var(--texto); opacity: .45; }
+.sec-padres::before {
+  content: "";
+  display: block;
+  width: 46px;
+  height: 32px;
+  margin: 0 auto 18px;
+  background: var(--hoja);
+  -webkit-mask: url("img/anillos.svg") center / contain no-repeat;
+  mask: url("img/anillos.svg") center / contain no-repeat;
+}
+.sec-padres .sec-titulo { font-family: var(--f-titulo); font-size: 18px; line-height: 1.5; letter-spacing: .12em; text-transform: uppercase; }
+.sec-invitacion .sec-titulo { font-family: var(--f-texto); font-size: 12px; letter-spacing: .24em; text-transform: uppercase; }
+.sec-padres .sec-titulo::after, .sec-invitacion .sec-titulo::after { margin-bottom: 8px; }
+.sec-padres p { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; }
+/* Padres en parejas: "Nombre & Nombre", y un espacio antes de la siguiente pareja */
+.lista { list-style: none; }
+.lista li { font-family: var(--f-script); font-size: 30px; line-height: 1.4; }
+.lista li:nth-child(odd):not(:last-child)::after { content: "&"; display: block; font-family: var(--f-titulo); font-size: 18px; color: var(--hoja); }
+.lista li:nth-child(even) { margin-bottom: 26px; }
+
+/* ---------- Nosotros: foto con bordes de papel rasgado ---------- */
+.sec-nosotros { padding-top: 0; }
+.nosotros-foto { margin: 0 -24px; }
+.nosotros-foto img, .nosotros-foto .foto-vacia {
+  display: block;
+  width: 100%;
+  aspect-ratio: 5 / 4;
+  height: auto;
+  object-fit: cover;
+  -webkit-mask: url("img/rasgado.svg") center / 100% 100% no-repeat;
+  mask: url("img/rasgado.svg") center / 100% 100% no-repeat;
+}
+.nosotros-antetitulo { margin-top: 30px; font-family: var(--f-titulo); font-size: 20px; letter-spacing: .2em; text-transform: uppercase; }
+.nosotros-nombres { display: flex; flex-direction: column; align-items: center; font-weight: 400; margin-top: 6px; }
+.nosotros-nombres .nombre { font-family: var(--f-script); font-size: clamp(48px, 14vw, 64px); line-height: 1.15; }
+.nosotros-nombres .y { font-family: var(--f-titulo); font-size: 22px; color: var(--hoja); line-height: 1; }
+.nosotros-texto { margin-top: 16px; }
+
+/* ---------- Monograma (calendario) ---------- */
+.monograma-sec { display: block; margin: 0 auto 18px; }
+img.monograma-sec { max-width: 140px; }
+.monograma-letras { font-family: var(--f-titulo); font-size: 64px; line-height: 1; color: var(--salvia); letter-spacing: .04em; }
+.monograma-y { font-size: .45em; color: var(--hoja); margin: 0 .2em; vertical-align: middle; }
+.texto-invitacion { font-family: var(--f-titulo); font-size: 20px; line-height: 1.6; }
+
+/* ---------- Nuestra historia: fotos en arco ---------- */
+.historia { display: flex; flex-direction: column; align-items: center; gap: 22px; }
+.historia + .historia { margin-top: 40px; }
+.historia img, .historia .foto-vacia {
+  order: -1;
+  width: 78%;
+  aspect-ratio: 3 / 4;
+  height: auto;
+  object-fit: cover;
+  border-radius: 999px 999px 0 0;
+  box-shadow: 0 0 0 8px var(--fondo), 0 0 0 9px var(--linea);
+}
+.historia .cuando { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--salvia); }
+.historia h3 { font-family: var(--f-titulo); font-weight: 500; font-size: 22px; }
+.historia .bloque p { font-family: var(--f-titulo); font-size: 18px; line-height: 1.65; }
+
+/* ---------- Cuenta regresiva ---------- */
+/* "Comenzó la cuenta regresiva / para nuestro matrimonio" y números 98:20:31:22 */
+.sec-cuenta_regresiva .sec-titulo { font-family: var(--f-titulo); font-size: 20px; letter-spacing: .14em; text-transform: uppercase; }
+.sec-cuenta_regresiva .sec-titulo::after { display: none; }
+.cr-subtitulo { font-family: var(--f-script); font-size: 24px; color: var(--hoja); margin-bottom: 18px; }
+.cuenta-regresiva { display: flex; justify-content: center; }
+.cuenta-regresiva div { flex: 0 1 auto; }
+.cuenta-regresiva span {
+  position: relative;
+  z-index: 0;
+  display: block;
+  font-family: var(--f-texto);
+  font-weight: 300;
+  font-size: clamp(36px, 11.5vw, 50px);
+  line-height: 1.1;
+  color: var(--texto);
+  font-variant-numeric: tabular-nums;
+}
+.cuenta-regresiva div:not(:last-child) span::after { content: ":"; }
+/* Los segundos van sobre un corazón */
+.cuenta-regresiva div:last-child span { color: #fff; }
+.cuenta-regresiva div:last-child span::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -10px -12px -16px;
+  background: var(--hoja);
+  -webkit-mask: url("img/corazon.svg") center / contain no-repeat;
+  mask: url("img/corazon.svg") center / contain no-repeat;
+}
+.cuenta-regresiva small { display: block; margin-top: 8px; padding-right: .6em; font-size: 10px; letter-spacing: .06em; }
+.cr-final { font-family: var(--f-script); font-size: 38px; color: var(--salvia); }
+
+/* ---------- Calendario del mes ---------- */
+#invitacion .mes { width: 100%; max-width: 360px; margin: 0 auto; border-collapse: collapse; font-size: 13px; }
+.mes caption {
+  font-family: var(--f-titulo);
+  font-size: 24px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  padding-bottom: 14px;
+}
+.mes th { font-weight: 500; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--salvia); padding-bottom: 8px; }
+.mes td { height: 40px; color: color-mix(in srgb, var(--texto) 70%, transparent); }
+.mes .dia-evento { position: relative; color: #fff; font-weight: 500; }
+.mes .dia-evento::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  z-index: -1;
+  background: var(--salvia);
+  -webkit-mask: url("img/corazon.svg") center / contain no-repeat;
+  mask: url("img/corazon.svg") center / contain no-repeat;
+}
+.mes .dia-evento { z-index: 0; }
+.sec-calendario .rsvp-acciones { margin-top: 24px; }
+.sec-calendario .sec-titulo { font-family: var(--f-texto); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; }
+/* Iniciales más arriba y separadas del título */
+.sec-calendario .monograma-sec { padding-bottom: 38px; transform: translateY(-18px); }
+
+/* ---------- Galería: fotos grandes, una debajo de otra ---------- */
+.galeria-fotos { display: flex; flex-direction: column; gap: 18px; padding: 0 6px; }
+.galeria-fotos > * {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .12);
+}
+.galeria-subir { margin-top: 24px; }
+
+/* ---------- Lugar ---------- */
+.mascota { display: none; }
+/* Flor arriba, luego "Día de la boda" y luego cada lugar (sin la fecha) */
+.evento .dia { display: none; }
+.sec-lugares .sec-titulo { display: flex; flex-direction: column; align-items: center; }
+.sec-lugares .sec-titulo::after { order: -1; margin: 0 auto 14px; }
+.evento .detalle { display: none; }
+.momento { margin-top: 30px; }
+.momento + .momento { margin-top: 48px; padding-top: 40px; border-top: 1px solid var(--linea); }
+.momento > img, .momento > .foto-vacia { aspect-ratio: 4 / 3; height: auto; border-radius: 6px; margin-bottom: 18px; object-fit: cover; }
+.momento h3 { font-family: var(--f-titulo); font-weight: 400; font-size: 30px; letter-spacing: .04em; }
+.momento p { font-size: 13px; line-height: 1.9; }
+.mapa {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 0;
+  border-radius: 8px;
+  margin-top: 22px;
+  box-shadow: 0 0 0 1px var(--linea);
+}
+
+/* ---------- Itinerario: línea de tiempo con corazones ---------- */
+.itinerario-lista { list-style: none; position: relative; max-width: 320px; margin: 0 auto; }
+.itinerario-lista::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 50%;
+  width: 1px;
+  background: var(--hoja);
+}
+.itinerario-lista li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 44px;
+  align-items: center;
+  padding: 16px 0;
+}
+.itinerario-lista li::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translate(-50%, -50%);
+  background: var(--salvia);
+  -webkit-mask: url("img/corazon.svg") center / contain no-repeat;
+  mask: url("img/corazon.svg") center / contain no-repeat;
+}
+.itinerario-lista .actividad { text-align: right; font-size: 11px; line-height: 1.6; letter-spacing: .12em; text-transform: uppercase; font-weight: 500; }
+.itinerario-lista .hora { text-align: left; font-family: var(--f-titulo); font-size: 20px; }
+
+/* ---------- Bloques verde salvia (regalos, vestimenta, aviso) ---------- */
+.sec-obsequios, .sec-vestimenta, .sec-aviso { padding: 64px 42px; }
+.sec-obsequios > *, .sec-vestimenta > *, .sec-aviso > * { position: relative; }
+.sec-obsequios::before, .sec-vestimenta::before, .sec-aviso::before {
+  content: "";
+  position: absolute;
+  inset: 20px 16px;
+  background: var(--salvia);
+  border-radius: 14px;
+}
+.sec-obsequios, .sec-vestimenta, .sec-aviso { color: #fff; }
+.sec-obsequios .sec-titulo, .sec-vestimenta .sec-titulo, .sec-aviso .sec-titulo { color: #fff; }
+.sec-obsequios .sec-titulo::after, .sec-vestimenta .sec-titulo::after, .sec-aviso .sec-titulo::after,
+.con-separador :is(.sec-obsequios, .sec-vestimenta, .sec-aviso) .sec-titulo::after {
+  width: 110px;
+  height: 33px;
+  background: #fff;
+  -webkit-mask: url("img/ramita.svg") center / contain no-repeat;
+  mask: url("img/ramita.svg") center / contain no-repeat;
+  opacity: .8;
+}
+.vestimenta-codigo { font-family: var(--f-titulo); font-size: 24px; letter-spacing: .3em; text-transform: uppercase; margin-top: -10px; }
+/* Ilustración de la ropa sobre un arco claro (se ve bien aunque la ropa sea oscura) */
+.vestimenta-ilustracion {
+  display: block;
+  width: 210px;
+  height: 250px;
+  margin: 0 auto 22px;
+  padding: 22px 26px 0;
+  object-fit: contain;
+  object-position: bottom;
+  background: var(--fondo);
+  border-radius: 999px 999px 0 0;
+}
+#invitacion .sec-vestimenta .sec-titulo::after, #invitacion .sec-vestimenta::after { display: none; }
+.sec-vestimenta .vestimenta-codigo { margin-top: 6px; }
+.sec-vestimenta p:not(.vestimenta-codigo) { font-family: var(--f-titulo); font-size: 17px; line-height: 1.6; }
+/* Flor dibujada al final del bloque */
+.sec-vestimenta::after {
+  content: "";
+  position: relative;
+  display: block;
+  width: 120px;
+  height: 40px;
+  margin: 14px auto 0;
+  background: #fff;
+  opacity: .8;
+  -webkit-mask: url("img/ramita.svg") center / contain no-repeat;
+  mask: url("img/ramita.svg") center / contain no-repeat;
+}
+.sec-obsequios > .icono-regalo { width: 46px; height: 46px; margin-bottom: -4px; background: #fff; }
+.codigo-novios { font-weight: 500; font-size: 15px; letter-spacing: .06em; margin-top: 14px !important; }
+.cuenta .icono-regalo { width: 30px; height: 30px; margin: 0 auto 10px; background: #fff; opacity: .8; }
+.cuenta { margin-top: 26px; padding: 18px; border-top: 1px solid rgba(255, 255, 255, .35); }
+.cuenta p { line-height: 1.7; overflow-wrap: anywhere; }
+.cuenta .numero { font-size: 18px; letter-spacing: .12em; font-weight: 500; }
+.copiar {
+  margin-top: 12px;
+  min-height: 44px;
+  padding: 8px 20px;
+  border-radius: 999px;
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
+  font: 500 11px var(--f-texto);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.copiar:hover { background: #fff; color: var(--salvia); }
+.yappy { margin-top: 18px; }
+#invitacion :is(.sec-obsequios, .sec-vestimenta, .sec-aviso) .boton { background: #fff; color: var(--salvia); border-color: #fff; }
+
+/* ---------- Puestos ---------- */
+.puestos-nombre { font-family: var(--f-script); font-size: clamp(34px, 9vw, 44px); line-height: 1.2; overflow-wrap: anywhere; }
+.puestos-texto, .puestos-unidad { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; }
+.puestos-numero { font-family: var(--f-titulo); font-size: 72px; line-height: 1.1; color: var(--salvia); }
+.puestos-aviso { font-family: var(--f-titulo); font-style: italic; font-size: 18px; }
+
+/* ---------- Confirmar asistencia ---------- */
+.aviso-rsvp { font-size: 13px; margin-bottom: 26px !important; }
+.rsvp-caja:focus { outline: none; }
+.formulario { display: flex; flex-direction: column; gap: 22px; text-align: left; }
+.formulario fieldset { border: 0; }
+.formulario label, .formulario legend { display: block; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 8px; }
+/* Formulario sencillo: campos con línea abajo, opciones en recuadros y botón rectangular */
+.sec-rsvp { --linea-form: color-mix(in srgb, var(--texto) 30%, transparent); }
+.formulario input[type="text"], .formulario select {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 2px;
+  border: 0;
+  border-bottom: 1px solid var(--linea-form);
+  border-radius: 0;
+  background: transparent;
+  font: 16px var(--f-texto);
+  color: var(--texto);
+}
+.formulario textarea {
+  width: 100%;
+  min-height: 110px;
+  padding: 10px;
+  border: 1px solid var(--linea-form);
+  border-radius: 0;
+  background: transparent;
+  font: 16px var(--f-texto);
+  color: var(--texto);
+  resize: vertical;
+}
+.formulario :is(input, textarea, select):focus { outline: none; border-color: var(--salvia); }
+.formulario :is(input, textarea, select):focus-visible { box-shadow: 0 2px 0 var(--salvia); }
+.opciones { display: flex; gap: 10px; }
+.opciones label { margin: 0; flex: 1; cursor: pointer; }
+.opciones input { position: absolute; opacity: 0; width: 0; }
+.opciones span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 10px 6px;
+  border: 1px solid var(--linea-form);
+  border-radius: 0;
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-align: center;
+  transition: background .2s, color .2s;
+}
+.formulario .rsvp-acciones { justify-content: flex-start; margin-top: 8px; }
+#invitacion .formulario .boton { border-radius: 0; box-shadow: none; padding: 12px 26px; }
+.opciones input:checked + span { background: var(--salvia); border-color: var(--salvia); color: #fff; }
+.opciones input:focus-visible + span { outline: 2px solid var(--salvia); outline-offset: 2px; }
+.rsvp-error { color: #a3262a; font-size: 14px; }
+.rsvp-error:empty { display: none; }
+.rsvp-acciones { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 18px; }
+.formulario .rsvp-acciones { margin-top: 0; }
+.gracias-rsvp { font-family: var(--f-script); font-size: 34px; color: var(--salvia); }
+.rsvp-mensaje { font-style: italic; overflow-wrap: anywhere; }
+.calendario { margin-top: 26px; }
+.calendario-titulo { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; }
+
+/* ---------- Playlist, álbum y contacto ---------- */
+.icono {
+  display: block;
+  width: 34px;
+  height: 34px;
+  margin: 0 auto 10px;
+  background: var(--salvia);
+}
+.icono-musica { -webkit-mask: url("img/musica.svg") center / contain no-repeat; mask: url("img/musica.svg") center / contain no-repeat; }
+.icono-camara { -webkit-mask: url("img/camara.svg") center / contain no-repeat; mask: url("img/camara.svg") center / contain no-repeat; }
+.icono-regalo { -webkit-mask: url("img/regalo.svg") center / contain no-repeat; mask: url("img/regalo.svg") center / contain no-repeat; }
+.sec-album .icono-camara { width: 46px; height: 46px; }
+.divisor { width: 70px; margin: 22px auto 0; border: 0; border-top: 1px solid var(--texto); opacity: .35; }
+.sec-playlist {
+  background: radial-gradient(ellipse at 50% 50%, color-mix(in srgb, var(--hoja) 22%, transparent), transparent 70%);
+}
+.qr {
+  width: 208px;
+  margin: 28px auto 0;
+  padding: 16px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--hoja) 30%, transparent);
+}
+.qr img, .qr canvas { display: block; width: 176px !important; height: 176px !important; }
+.qr-nota { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; margin-top: 14px !important; }
+.sec-contacto { padding-top: 24px; }
+
+/* ---------- Cierre ---------- */
+.sec-cierre { padding-bottom: 40px; }
+/* Espacio al final de la página para el botón flotante de música */
+.sec:last-child { padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px)); }
+.sec-cierre .sec-titulo { font-size: clamp(46px, 13vw, 60px); }
+.cierre-foto { margin: 0 -24px 24px; }
+.cierre-foto img, .cierre-foto .foto-vacia { width: 100%; aspect-ratio: 4 / 3; height: auto; object-fit: cover; display: block; }
+.sec-cierre p { font-family: var(--f-titulo); font-style: italic; font-size: 19px; }
+
+/* ---------- Botones ---------- */
+#invitacion .boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  margin-top: 22px;
+  padding: 12px 30px;
+  border: 1px solid var(--salvia);
+  border-radius: 999px;
+  background: var(--salvia);
+  color: #fff;
+  font: 500 11px var(--f-texto);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--salvia) 30%, transparent);
+  transition: transform .2s, box-shadow .2s;
+}
+#invitacion .boton:hover { transform: translateY(-1px); box-shadow: 0 8px 20px color-mix(in srgb, var(--salvia) 40%, transparent); }
+#invitacion .boton:disabled { opacity: .6; cursor: wait; }
+#invitacion .rsvp-acciones .boton { margin-top: 0; }
+#invitacion .boton-secundario { background: transparent; color: var(--salvia); box-shadow: none; }
+
+/* ---------- Paleta de colores (vestimenta) ---------- */
+.paleta { margin: 26px 0 18px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, .35); }
+.sec-vestimenta p.paleta-titulo { font-family: var(--f-texto); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; margin-bottom: 16px; }
+.paleta-colores { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 8px; max-width: 280px; margin: 0 auto; }
+.paleta-colores li { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.paleta-circulo { width: 46px; height: 46px; border-radius: 50%; box-shadow: 0 0 0 2px rgba(255, 255, 255, .85); }
+.paleta-nombre { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; line-height: 1.3; }
+
+/* Frase "Caminaremos juntos hacia el altar" y firma de la historia */
+.historia .bloque p:nth-last-child(-n+2) { font-family: var(--f-script); font-size: 26px; line-height: 1.3; }
+.historia .bloque p:nth-last-child(2) { margin-top: 22px; }
+.historia .bloque { max-width: 340px; }
+
+/* Ramo de orquídeas en las esquinas: más pequeño para no tapar el texto */
+.con-esquina .adorno { width: 150px; height: 190px; }
+.con-esquina .adorno-der { top: -40px; right: -46px; }
+.con-esquina .adorno-abajo { bottom: -50px; left: -52px; }
+
+/* Fondo de terraza frente al mar con un velo marfil para que el texto se lea bien */
+body.con-fondo::before {
+  background: linear-gradient(rgba(246, 241, 232, .62), rgba(246, 241, 232, .62)), var(--fondo) var(--img-fondo) center / cover no-repeat;
+}
+body .tarjeta.tarjeta-entrada {
+  background: linear-gradient(rgba(246, 241, 232, .45), rgba(246, 241, 232, .45)), var(--fondo) var(--img-fondo, none) center / cover no-repeat;
+}
+
+/* ---------- Flores (durazno, azul y crema) recortadas en 4 piezas ----------
+   flores-arriba: guirnalda bajo los títulos · flores-izq / flores-der: ramos verticales en la portada
+   flores-abajo: guirnalda en forma de sonrisa que cierra padres y despedida */
+.con-separador .sec-titulo::after { width: 190px; height: 72px; margin: 8px auto 16px; }
+.con-esquina .adorno { width: 92px; height: 245px; opacity: 1; background-size: contain; background-repeat: no-repeat; }
+.con-esquina .adorno-der { top: -8px; right: -22px; left: auto; transform: none; background-image: url("../../media/flores-der.webp"); background-position: top right; }
+.con-esquina .adorno-abajo { bottom: -70px; left: -22px; right: auto; transform: none; background-image: url("../../media/flores-izq.webp"); background-position: bottom left; }
+.sec-cierre::after {
+  content: "";
+  display: block;
+  width: min(300px, 80%);
+  aspect-ratio: 620 / 220;
+  margin: 8px auto 0;
+  background: url("../../media/flores-abajo.webp") center / contain no-repeat;
+}
+.sec-cierre::after { margin-top: 22px; }
+
+/* Menos flores: la guirnalda solo bajo "Con la bendición de Dios…"; los demás títulos llevan la ramita fina */
+#invitacion .sec-padres .sec-titulo::after {
+  -webkit-mask: none;
+  mask: none;
+  width: 190px;
+  height: 72px;
+  margin: 8px auto 16px;
+  background: url("../../media/flores-arriba.webp") center / contain no-repeat;
+}
