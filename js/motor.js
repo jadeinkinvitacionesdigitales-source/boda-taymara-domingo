@@ -267,6 +267,20 @@ async function iniciar() {
 
   let invitado = null;
   let codigoInvalido = false;
+  // Enlace personal del panel: ?n=Nombre&p=Puestos
+  const ps = new URLSearchParams(location.search);
+  const nombreEnlace = (ps.get('n') || '').trim().replace(/\s+/g, ' ').slice(0, 120);
+  const puestosEnlace = Math.max(0, Math.min(20, parseInt(ps.get('p'), 10) || 0));
+  if (CONFIG.EVENTO && (nombreEnlace || puestosEnlace)) {
+    invitado = { nombre: nombreEnlace, enlace: nombreEnlace, puestos: puestosEnlace || 1, estado: 'pendiente' };
+    try {
+      const guardado = JSON.parse(localStorage.getItem('rsvp:' + slug + ':' + nombreEnlace.toLowerCase()) || 'null');
+      if (guardado) Object.assign(invitado, guardado, { enlace: nombreEnlace, puestos: invitado.puestos });
+    } catch { /* nada */ }
+    await pintar(evento, { slug, codigo: 'ENLACE', invitado });
+    if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
+    return;
+  }
   if (codigo) {
     try {
       invitado = await api.invitado(slug, codigo);

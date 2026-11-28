@@ -187,6 +187,11 @@
         "qr": false
       },
       {
+        "tipo": "playlist",
+        "titulo": "¡La fiesta la hacemos todos!",
+        "texto": "¿Qué canción no puede faltar para que bailes toda la noche? Sugiérela aquí y la pondremos en la pista."
+      },
+      {
         "tipo": "puestos"
       },
       {

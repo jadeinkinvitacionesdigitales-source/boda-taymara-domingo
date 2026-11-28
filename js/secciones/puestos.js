@@ -5,7 +5,7 @@ export default function puestos(sec, ctx) {
   const inv = ctx.invitado;
   if (inv) {
     return crear('section', {},
-      crear('p', { clase: 'puestos-nombre' }, inv.nombre),
+      inv.nombre ? crear('p', { clase: 'puestos-nombre' }, inv.nombre) : null,
       crear('p', { clase: 'puestos-texto' }, sec.texto || 'Hemos reservado para ti'),
       crear('p', { clase: 'puestos-numero' }, inv.puestos),
       crear('p', { clase: 'puestos-unidad' }, inv.puestos === 1 ? 'puesto' : 'puestos'));

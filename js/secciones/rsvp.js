@@ -19,21 +19,24 @@ export default function rsvp(sec, ctx) {
   let recienEnviado = false;
   let general = null; // respuesta enviada sin enlace personal
 
+  // replaceChildren escribiría «null» por las partes vacías
+  const poner = (...hijos) => caja.replaceChildren(...hijos.flat().filter(Boolean));
+
   function pintar() {
-    if (ev.rsvp_cerrado) return caja.replaceChildren(...cerrado());
-    if (general) return caja.replaceChildren(crear('p', { clase: 'gracias-rsvp' }, '¡Gracias! Recibimos tu respuesta.'), ...resumen(general));
+    if (ev.rsvp_cerrado) return poner(...cerrado());
+    if (general) return poner(crear('p', { clase: 'gracias-rsvp' }, '¡Gracias! Recibimos tu respuesta.'), ...resumen(general));
     if (inv && inv.estado !== 'pendiente' && !editando) {
       const cambiar = crear('button', { clase: 'boton', type: 'button' }, 'Cambiar respuesta');
       cambiar.addEventListener('click', () => { editando = true; recienEnviado = false; pintar(); caja.focus(); });
-      return caja.replaceChildren(
+      return poner(
         recienEnviado ? crear('p', { clase: 'gracias-rsvp' }, '¡Gracias! Recibimos tu respuesta.') : null,
         ...resumen(inv),
         inv.estado === 'confirmado' ? calendario() : null,
         crear('div', { clase: 'rsvp-acciones' }, cambiar));
     }
-    if (inv) return caja.replaceChildren(formulario(false));
-    if (ev.rsvp_sin_codigo) return caja.replaceChildren(formulario(true));
-    caja.replaceChildren(crear('p', { clase: 'aviso-rsvp' }, ctx.codigoInvalido
+    if (inv) return poner(formulario(!inv.nombre));
+    if (ev.rsvp_sin_codigo) return poner(formulario(true));
+    poner(crear('p', { clase: 'aviso-rsvp' }, ctx.codigoInvalido
       ? 'No encontramos tu invitación personal. Para confirmar, abre el enlace que recibiste por WhatsApp.'
       : 'Para confirmar tu asistencia, usa el enlace personal que recibiste por WhatsApp.'));
   }
@@ -59,7 +62,7 @@ export default function rsvp(sec, ctx) {
 
   function formulario(sinCodigo) {
     const id = 'rsvp' + (++contador);
-    const maximo = sinCodigo ? 10 : inv.puestos;
+    const maximo = inv ? inv.puestos : 10;
     const error = crear('p', { clase: 'rsvp-error', role: 'alert' });
     const enviar = crear('button', { clase: 'boton', type: 'submit' }, 'Enviar');
 
@@ -70,7 +73,7 @@ export default function rsvp(sec, ctx) {
 
     const personas = crear('select', { id: id + '-personas', name: 'personas' },
       Array.from({ length: maximo }, (_, i) => crear('option', { value: i + 1 }, i + 1)));
-    personas.value = String(inv && inv.asistentes ? inv.asistentes : sinCodigo ? 1 : maximo);
+    personas.value = String(inv && inv.asistentes ? inv.asistentes : inv ? maximo : 1);
     const campoPersonas = crear('div', { clase: 'campo-personas' },
       crear('label', { for: id + '-personas' }, 'Número de personas'), personas);
 
@@ -108,10 +111,18 @@ export default function rsvp(sec, ctx) {
           // En la vista previa del Generador no se guarda nada
           const r = { nombre: sinCodigo ? nombre.value.trim() : inv.nombre, puestos: maximo, estado: asiste === 'si' ? 'confirmado' : 'no_asiste', asistentes: cuantos, mensaje: mensaje.value.trim() };
           if (sinCodigo) general = r; else inv = r;
-        } else if (sinCodigo) {
-          general = await api.responderGeneral(ctx.slug, nombre.value.trim(), asiste === 'si', cuantos, mensaje.value.trim());
         } else {
-          inv = await api.responder(ctx.slug, ctx.codigo, asiste === 'si', cuantos, mensaje.value.trim());
+          const r = await api.confirmar({
+            nombre: sinCodigo ? nombre.value.trim() : inv.nombre,
+            invitado: inv ? inv.enlace || '' : '',
+            puestos: inv ? inv.puestos : '',
+            asiste: asiste === 'si', personas: cuantos, mensaje: mensaje.value.trim(),
+            whatsapp: ctx.config.contacto_whatsapp, titulo: ev.titulo,
+          });
+          if (inv) {
+            inv = { ...inv, ...r, puestos: inv.puestos, enlace: inv.enlace };
+            try { localStorage.setItem('rsvp:' + ctx.slug + ':' + (inv.enlace || '').toLowerCase(), JSON.stringify({ nombre: r.nombre, estado: r.estado, asistentes: r.asistentes, mensaje: r.mensaje })); } catch { /* nada */ }
+          } else general = r;
         }
         editando = false;
         recienEnviado = true;
