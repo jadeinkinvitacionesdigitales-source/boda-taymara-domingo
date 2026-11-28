@@ -38,7 +38,7 @@ function tarjeta(sec, ctx) {
 
   // Monograma sobre la foto: la imagen subida o, si no hay, las iniciales
   const monograma = ctx.ruta(ctx.config.monograma);
-  const iniciales = [n.principal, n.secundario].filter(Boolean).map((t) => t.trim()[0] || '').join(' ');
+  const iniciales = ctx.config.monograma_texto || [n.principal, n.secundario].filter(Boolean).map((t) => t.trim()[0] || '').join(' ');
   const sello = monograma
     ? crear('img', { clase: 'sello', src: monograma, alt: '' })
     : iniciales ? crear('p', { clase: 'sello sello-letras', 'aria-hidden': 'true' }, iniciales) : null;

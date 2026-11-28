@@ -23,7 +23,7 @@ export function monograma(ctx, clase = 'monograma-sec') {
   const n = ctx.config.nombres || {};
   const src = ctx.ruta(ctx.config.monograma);
   if (src) return crear('img', { clase, src, alt: '' });
-  const iniciales = [n.principal, n.secundario].filter(Boolean).map((t) => t.trim()[0] || '');
+  const iniciales = Array.isArray(ctx.config.monograma_iniciales) ? ctx.config.monograma_iniciales : [n.principal, n.secundario].filter(Boolean).map((t) => t.trim()[0] || '');
   if (!iniciales.length) return null;
   return crear('p', { clase: clase + ' monograma-letras', 'aria-hidden': 'true' },
     iniciales.flatMap((l, i) => (i ? [crear('span', { clase: 'monograma-y' }, '&'), l] : [l])));

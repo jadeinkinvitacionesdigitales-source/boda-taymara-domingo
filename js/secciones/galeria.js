@@ -6,7 +6,8 @@ export default function galeria(sec, ctx) {
   const fotos = Array.isArray(sec.fotos) ? sec.fotos : [];
   const subir = enlaceSeguro(sec.subir_fotos_url);
   if (!fotos.length && !subir) return null;
-  return crear('section', {},
+  // "estilo": "amplia" = foto a todo lo ancho con bordes de papel rasgado
+  return crear('section', { clase: sec.estilo === 'amplia' ? 'galeria-amplia' : null },
     titulo(sec, ''),
     fotos.length ? crear('div', { clase: 'galeria-fotos' }, fotos.map((f, i) => foto(ctx, f, 'Foto ' + (i + 1), 'Foto ' + (i + 1)))) : null,
     subir ? crear('div', { clase: 'galeria-subir' },

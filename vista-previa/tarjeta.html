@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Parisienne&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500&display=swap">
+<style>
+html,body{margin:0;width:1200px;height:630px;overflow:hidden}
+body{background:#f3efe6 url(../media/fondo-terraza-mar.webp) center/cover;font-family:Montserrat,sans-serif;color:#453832;position:relative}
+body::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(243,239,230,.35) 0%,rgba(243,239,230,.82) 42%,rgba(243,239,230,.9) 100%)}
+.marco{position:absolute;inset:22px;border:1.5px solid #a59788;outline:1px solid rgba(165,151,136,.45);outline-offset:7px;border-radius:6px}
+.flor{position:absolute;pointer-events:none}
+.flor.a{right:-30px;top:-40px;width:250px;transform:rotate(18deg)}
+.flor.b{right:-20px;bottom:-60px;width:220px;transform:rotate(200deg)}
+.foto{position:absolute;left:78px;top:52px;width:372px;height:526px;padding:6px;border-radius:200px 200px 16px 16px;background:linear-gradient(135deg,#8c7b6b,#d9cdbd 40%,#a59788 60%,#efe6d8 80%,#7d6c5c);box-shadow:0 18px 40px rgba(69,56,50,.35)}
+.foto img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;border-radius:194px 194px 11px 11px;display:block}
+.txt{position:absolute;left:480px;right:90px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.eyebrow{font-size:19px;letter-spacing:.45em;text-transform:uppercase;color:#8c7b6b;font-weight:500}
+.nombre{font-family:Parisienne,cursive;font-size:96px;line-height:1.05;margin:14px 0 0;color:#453832}
+.amp{font-family:Parisienne,cursive;font-size:56px;color:#a59788;line-height:1;margin:-4px 0}
+.linea{width:280px;height:1px;background:linear-gradient(90deg,transparent,#a59788,transparent);margin:22px 0 18px}
+.fecha{font-family:"Cormorant Garamond",serif;font-size:36px;font-weight:600;font-variant-numeric:lining-nums}
+.lugar{font-size:19px;letter-spacing:.16em;text-transform:uppercase;color:#6e5f55;margin-top:10px}
+</style></head><body>
+<img class="flor a" src="../media/flores-orquidea-v.webp" alt="">
+<img class="flor b" src="../media/flores-orquidea-v.webp" alt="">
+<div class="marco"></div>
+<div class="foto"><img src="../media/foto-portada.webp" alt=""></div>
+<div class="txt">
+  <div class="eyebrow">Nuestra boda</div>
+  <div class="nombre">Taymara</div>
+  <div class="amp">&amp;</div>
+  <div class="nombre" style="margin-top:0">Domingo</div>
+  <div class="linea"></div>
+  <div class="fecha">Sábado 27 de febrero 2027 · 3:00 p. m.</div>
+  <div class="lugar">Ciudad de Panamá</div>
+</div>
+</body></html>

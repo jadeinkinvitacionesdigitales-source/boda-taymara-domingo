@@ -6,7 +6,7 @@
   "fecha_fin": "2027-02-27T23:00:00-05:00",
   "plantilla": "boda-jardin-salvia",
   "estado": "publicado",
-  "rsvp_limite": "2027-01-10",
+  "rsvp_limite": "2026-12-27",
   "rsvp_sin_codigo": true,
   "config": {
     "idioma": "es",
@@ -23,14 +23,14 @@
     },
     "adornos": {
       "fondo": "media/fondo-terraza-mar.webp",
-      "esquina": "media/flores-der.webp"
+      "esquina": "media/flores-orquidea-v.webp"
     },
     "contacto_whatsapp": "+507 6692-4009",
     "whatsapp_plantilla": "Hola {nombre} 💌 Con mucho cariño te invitamos a {titulo}. Hemos reservado {puestos} puesto(s) para ti. Abre tu invitación y confirma aquí: {enlace}",
     "compartir": {
-      "titulo": "Nuestra boda | Taymara & Domingo",
-      "descripcion": "27.02.2027",
-      "imagen": "media/foto-principal.webp"
+      "titulo": "Taymara & Domingo · Nuestra boda",
+      "descripcion": "2 almas, 1 camino · Sábado 27 de febrero de 2027, 3:00 p. m. · Ciudad de Panamá",
+      "imagen": "img/vista-previa.jpg"
     },
     "secciones": [
       {
@@ -63,6 +63,21 @@
         ]
       },
       {
+        "tipo": "frase",
+        "texto": "Caminaremos juntos hacia el altar"
+      },
+      {
+        "tipo": "galeria",
+        "fotos": [
+          "media/foto-caminando.webp"
+        ]
+      },
+      {
+        "tipo": "cuenta_regresiva",
+        "titulo": "Comenzó la cuenta regresiva",
+        "subtitulo": "para nuestro matrimonio"
+      },
+      {
         "tipo": "historia",
         "titulo": "Nuestra historia",
         "items": [
@@ -74,21 +89,13 @@
         ]
       },
       {
-        "tipo": "frase",
-        "texto": "Caminaremos juntos hacia el altar"
-      },
-      {
-        "tipo": "cuenta_regresiva",
-        "titulo": "Comenzó la cuenta regresiva",
-        "subtitulo": "para nuestro matrimonio"
-      },
-      {
         "tipo": "calendario"
       },
       {
         "tipo": "galeria",
+        "estilo": "amplia",
         "fotos": [
-          "media/foto-galeria.webp"
+          "media/foto-lago-miradas.webp"
         ]
       },
       {
@@ -113,7 +120,7 @@
         "tipo": "itinerario",
         "items": [
           {
-            "hora": "2:40 p. m.",
+            "hora": "2:30 p. m.",
             "texto": "Llegada de invitados a la iglesia"
           },
           {
@@ -137,18 +144,6 @@
             "texto": "Despedida"
           }
         ]
-      },
-      {
-        "tipo": "obsequios",
-        "titulo": "¿Qué regalarnos?",
-        "texto": "El mejor regalo es tu compañía, pero si deseas contribuir a nuestro futuro juntos, aquí te dejamos nuestros datos con mucho amor.",
-        "banco": {
-          "titular": "Taymara Villarreal Gondola",
-          "identificacion": "Cédula 0-000-0000",
-          "numero": "00-00-00-000000-0",
-          "banco": "Nombre del banco",
-          "tipo": "Ahorros"
-        }
       },
       {
         "tipo": "vestimenta",
@@ -203,9 +198,14 @@
       {
         "tipo": "cierre",
         "titulo": "¡Los esperamos!",
-        "texto": "Gracias por acompañarnos en este día tan especial.",
-        "foto": "media/foto-principal.webp"
+        "texto": "Nos hará muy felices compartir este día tan especial con quienes más queremos.",
+        "foto": "media/foto-cierre.webp"
       }
+    ],
+    "monograma_texto": "D&T",
+    "monograma_iniciales": [
+      "D",
+      "T"
     ]
   }
 }
