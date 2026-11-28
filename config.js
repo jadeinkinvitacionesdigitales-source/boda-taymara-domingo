@@ -6,7 +6,7 @@ export const CONFIG = {
   // Pega aquí la URL de tu script de Google (termina en /exec).
   // Si la dejas vacía (''), el sitio funciona en MODO DEMOSTRACIÓN
   // con datos de ejemplo guardados solo en este navegador.
-  API_URL: '',
+  API_URL: 'https://script.google.com/macros/s/AKfycbxYc7oQWZAIfUv7EMuO4CqjydO8eVsmUdVO9dRY0Vy9DkmIQAhz00wSQ59PKM9URxwvnw/exec',
 
   // Nombre de tu marca (aparece en la página de inicio y en los paneles).
   MARCA: 'Jade Ink Studio',
