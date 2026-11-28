@@ -837,3 +837,18 @@ body .tarjeta.tarjeta-entrada {
 #invitacion .rsvp-caja, #invitacion .boton, .tarjeta .boton,
 #invitacion .opciones span, #invitacion .cuenta-regresiva div:last-child span { text-shadow: none; }
 .sello-letras { text-shadow: 0 2px 16px rgba(0, 0, 0, .45), 0 1px 3px rgba(0, 0, 0, .35); }
+
+/* ===== Ajuste 28-nov (3) ===== */
+/* La foto D&T pegada arriba: la portada no lleva el espacio de las demás secciones */
+#invitacion .sec-portada { padding-top: 0; padding-bottom: 0; }
+/* Separador de orquídeas entre la cuenta regresiva y "Nuestra historia" */
+.sec-cuenta_regresiva::after {
+  content: "";
+  display: block;
+  width: min(280px, 78%);
+  aspect-ratio: 700 / 482;
+  margin: 30px auto -20px;
+  background: url("../../media/flores-orquidea-2.webp") center / contain no-repeat;
+}
+/* La canción suena al tocar "Toca aquí…"; sin bloque de reproductor, solo el botón flotante ♪ */
+#sec-musica { display: none; }

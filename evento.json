@@ -43,6 +43,12 @@
         "despedida": "¡Te esperamos!"
       },
       {
+        "tipo": "musica",
+        "archivo": "audio/cancion.mp3",
+        "texto": "Dale play a nuestra canción",
+        "titulo": "Mi corazón encantado · violín"
+      },
+      {
         "tipo": "frase",
         "texto": "«Dios es amor; quien permanece en el amor permanece en Dios.»",
         "cita": "1 Juan 4:16"

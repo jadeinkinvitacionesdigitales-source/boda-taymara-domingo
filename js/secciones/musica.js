@@ -4,7 +4,7 @@ import { crear } from '../comun.js';
 export default function musica(sec, ctx) {
   const src = ctx.ruta(sec.archivo);
   if (!src) return null;
-  const audio = crear('audio', { src, loop: true, preload: 'none' });
+  const audio = crear('audio', { src, loop: true, preload: 'auto' });
   const etiqueta = crear('span', { clase: 'musica-etiqueta' }, '▶ Dale play');
   const boton = crear('button', { clase: 'boton boton-musica', type: 'button', 'aria-label': 'Reproducir nuestra canción' },
     crear('span', { clase: 'musica-icono', 'aria-hidden': 'true' }), etiqueta);
